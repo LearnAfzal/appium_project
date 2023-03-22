@@ -16,7 +16,7 @@ driver.find_element(By.XPATH, "//android.widget.TextView[@text='Sign in']").clic
 driver.find_element(By.XPATH, "//android.widget.TextView[@text='Sign in']").click()
 driver.find_element(By.XPATH, "//android.widget.EditText[@text='Enter an e-mail address or username']").send_keys("afzal")
 driver.find_element(By.XPATH, "//android.widget.EditText[@text='Password']").send_keys("afzal@123")
-driver.find_element(By.XPATH, "//android.widget.TextView[@text='Sign in'][2]").click()
+driver.find_element(By.XPATH, "(//android.widget.TextView[@text='Sign in'])[2]").click()
 actual_error=driver.find_element(By.XPATH, "//android.widget.TextView[@text='There was an issue signing in']").text
 print(actual_error)
 actual_error=driver.find_element(By.XPATH, "//android.widget.TextView[@text='There was an issue signing in']").get_attribute("text")
