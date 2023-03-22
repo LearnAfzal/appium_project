@@ -10,6 +10,10 @@ des_cap = {
 driver=webdriver.Remote(command_executor="http://localhost:4723/wd/hub",desired_capabilities=des_cap) # this local host address we are fetching from the Remote class
 driver.implicitly_wait(30)
 time.sleep(3)
+# By is parent Class
+# AppiumBy is child class which is inheriting the properties of 'By' parent class
+# we can make use of either By or AppiumBy.
+# In AppiumBy we can have some additional attributes other than in 'By' parent class which would be helpful in Mobile Automation.
 if len(driver.find_elements(By.XPATH,"//android.widget.TextView[@text='Dismiss']"))>0:
     driver.find_element(By.XPATH, "//android.widget.TextView[@text='Dismiss']").click()
 driver.find_element(By.XPATH, "//android.widget.TextView[@text='Sign in']").click()
