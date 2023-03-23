@@ -2,6 +2,7 @@ import time
 import pytest
 from appium import webdriver
 from appium.webdriver.common.appiumby import AppiumBy
+from assertpy import assert_that
 
 
 class AppiumConfig:
@@ -56,6 +57,9 @@ class TestAndroidDeviceLocal(AppiumConfig):
         self.driver.find_element(AppiumBy.XPATH,"(//android.widget.EditText[@resource-id='android:id/numberpicker_input'])[3]").clear()
         self.driver.find_element(AppiumBy.XPATH,"(//android.widget.EditText[@resource-id='android:id/numberpicker_input'])[3]").send_keys("1995")
         self.driver.find_element(AppiumBy.XPATH, "//android.widget.Button[@text='OK']").click()
-        self.driver.find_element(AppiumBy.XPATH, "//android.widget.EditText[@content-desc='Email address']").send_keys("afzal@gmail.com")
+        self.driver.find_element(AppiumBy.XPATH, "//android.widget.EditText[@content-desc='Email address']").send_keys("afzal")
         self.driver.find_element(AppiumBy.XPATH, "//android.widget.EditText[@content-desc='Password']").send_keys("afzal123")
-        #self.driver.find_element(AppiumBy.XPATH, "//android.widget.TextView[@text='CREATE']").click()
+        self.driver.find_element(AppiumBy.XPATH, "//android.widget.TextView[@text='CREATE']").click()
+        actual_error = self.driver.find_element(AppiumBy.XPATH,"//android.widget.TextView[@text='There was an issue signing in']").get_attribute("text")
+        print(actual_error)
+        assert_that("There was an issue signing in").is_equal_to(actual_error)
