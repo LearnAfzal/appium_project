@@ -25,17 +25,31 @@ class TestArts(AppiumConfig):
         self.driver.find_element(AppiumBy.ID, "org.khanacademy.android:id/tab_bar_button_search").click()
         self.driver.find_element(AppiumBy.XPATH, "//android.widget.TextView[@text='Arts and humanities']").click()
         time.sleep(5)
+        # scroll/swite upto 50%
+        size=self.driver.get_window_size()
+        x1=size['width']*(50/100)
+        y1 = size['width'] * (75 / 100)
+        x2 = size['width'] * (50 / 100)
+        y2 = size['width'] * (25 / 100) # diff b/w y1 & y2 will be 50
         self.driver.implicitly_wait(0)
         # swipe until //android.widget.TextView[@text='Art of Asia'] presence
-        # random coordinates
         while len(self.driver.find_elements(AppiumBy.XPATH, "//*[@text='Art of Asia']"))==0:
-            self.driver.swipe(902, 1174, 902, 794, 1000)
+            self.driver.swipe(x1, y1, x2, y2, 1000)
         self.driver.find_element(AppiumBy.XPATH, "//*[@text='Art of Asia']").click()
         self.driver.implicitly_wait(30)
 
+    def swipe_and_click_element(self, xpath):
+        size_dic = self.driver.get_window_size()
+        print(size_dic)
+        x1 = size_dic['width'] * (50 / 100)
+        y1 = size_dic['height'] * (75 / 100)
+
+        x2 = size_dic['width'] * (50 / 100)
+        y2 = size_dic['height'] * (25 / 100)
+
         self.driver.implicitly_wait(0)
-        while len(self.driver.find_elements(AppiumBy.XPATH, "//*[contains(@text,'Himal')]"))==0:
-            self.driver.swipe(902, 1174, 902, 794, 1000)
-        self.driver.find_element(AppiumBy.XPATH, "//*[contains(@text,'Himal')]").click()
+        while len(self.driver.find_elements(AppiumBy.XPATH, xpath)) == 0:
+            self.driver.swipe(x1, y1, x2, y2, 1000)
+
+        self.driver.find_element(AppiumBy.XPATH, xpath).click()
         self.driver.implicitly_wait(30)
-        time.sleep(5)
