@@ -36,3 +36,5 @@ class TestAdvanceCode(AppiumConfig):
         action.tap(self.driver.find_element(AppiumBy.XPATH, "//android.widget.TextView[@text='Arts and humanities']"),count=10).perform()
         #first of all it will take the coordinates/location of given locator & tap 10 times using the coordinates
         time.sleep(5)
+
+    
