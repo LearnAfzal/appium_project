@@ -3,6 +3,7 @@ import pytest
 from appium import webdriver
 from appium.webdriver.common.appiumby import AppiumBy
 from appium.webdriver.common.touch_action import TouchAction
+from appium.webdriver.extensions.android.nativekey import AndroidKey
 from assertpy import assert_that
 
 
@@ -36,5 +37,26 @@ class TestAdvanceCode(AppiumConfig):
         action.tap(self.driver.find_element(AppiumBy.XPATH, "//android.widget.TextView[@text='Arts and humanities']"),count=10).perform()
         #first of all it will take the coordinates/location of given locator & tap 10 times using the coordinates
         time.sleep(5)
+
+    def test_long_press_coordinates(self):
+        action = TouchAction(self.driver)
+        action.long_press(x=330, y=1102,
+                          duration=1000).perform()
+
+    def test_long_press_webelements(self):
+        time.sleep(2)
+        self.driver.press_keycode(AndroidKey.HOME)
+        time.sleep(2)
+        self.driver.swipe(902, 1174, 902, 794, 1000)
+        action = TouchAction(self.driver)
+        action.long_press(self.driver.find_element(AppiumBy.XPATH, "//*[contains(@text,'Khan')]"),
+                          duration=1000).perform()
+        self.driver.find_element(AppiumBy.XPATH, "//*[contains(@text,'App in')]").click()
+
+    # logics for press and move to
+    def test_press(self):
+        action = TouchAction(self.driver)
+        action.press(100, 100).wait(1000).move_to(200, 200).release()
+
 
     

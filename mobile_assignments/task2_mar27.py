@@ -38,3 +38,11 @@ class TestSauceApp(AppiumIosConfig):
                                              "//XCUIElementTypeStaticText[contains(@name,'Username and password do not match')]").text
         print(alert_msg)
         assert_that(alert_msg).is_equal_to("Username and password do not match any user in this service.")
+
+    def test_add_to_cart(self):
+        self.driver.find_element(AppiumBy.NAME, "test-Username").send_keys("standard_user")
+        self.driver.find_element(AppiumBy.XPATH, "//XCUIElementTypeSecureTextField[@name='test-Password']").send_keys(
+            "secret_sauce")
+        self.driver.find_element(AppiumBy.IOS_PREDICATE, "name=='test-LOGIN'").click()
+        # add to cart 4 items
+        self.driver.find_element(AppiumBy.XPATH, "//XCUIElementTypeOther[@name='test-Cart']").click()
